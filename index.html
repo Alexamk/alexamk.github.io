@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: #f4f4f4;
+        }
+        .timer {
+            text-align: center;
+            font-size: 2em;
+        }
+        .label {
+            font-size: 1em;
+            color: #888;
+			margin-top: 20px;
+			margin-bottom: 20px;
+		}
+    </style>
+</head>
+<body>
+    <div class="timer">
+        <div class="label" id="label_start">There are</div>
+		<div id="timeDisplay">Loading...</div>
+        <div class="label" id="label">left until Trump ends the war</div>
+    </div>
+
+    <script>
+        // Set your target date and time
+        const targetDate = new Date("2024-01-21T23:59:59");
+
+        function updateTimer() {
+            const now = new Date();
+            const timeDifference = targetDate - now;
+            const timeDisplay = document.getElementById("timeDisplay");
+            const label = document.getElementById("label");
+			const label_start = document.getElementById("label_start");
+
+            if (timeDifference > 0) {
+                // Countdown mode
+                const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+				label_start.textContent = "There are" 
+				timeDisplay.textContent = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
+                label.textContent = "left until Trump ends the war";
+
+            } else {
+                // Time passed mode
+                const passedTime = Math.abs(timeDifference);
+                const days = Math.floor(passedTime / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((passedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((passedTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((passedTime % (1000 * 60)) / 1000);
+
+				label_start.textContent = "It has been" 
+				timeDisplay.textContent = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
+                label.textContent = "since Trump should have ended the war.\n Is it over yet?";
+            }
+        }
+
+        // Update the timer every second
+        setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>
